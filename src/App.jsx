@@ -91,15 +91,15 @@ const productos = {
 };
 
 function App() {
-  // estado para guardar qué producto eligió el usuario
   const [seleccion, setSeleccion] = useState("");
+  // estado para guardar la imagen que se abre en el modal
+  const [imagenAbierta, setImagenAbierta] = useState(null);
 
-  // lista de items según lo que eligió
   const items = seleccion ? productos[seleccion] : [];
 
   return (
     <div className="container">
-      <h1>📚IMPRESOS AKAGAMY</h1>
+      <h1>IMPRESOS AKAGAMY</h1>
       <h2>🛄 MIRA NUESTRO PORTAFOLIO</h2>
 
       <div className="content-wrapper">
@@ -125,7 +125,13 @@ function App() {
           <div id="galeria">
             {items.map((item, index) => (
               <div className="producto-item" key={index}>
-                <img src={`/img/${item.img}`} alt={item.alt} />
+                {/* al hacer click en la imagen se guarda en el estado */}
+                <img
+                  src={`/img/${item.img}`}
+                  alt={item.alt}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setImagenAbierta(`/img/${item.img}`)}
+                />
                 <div className="producto-info">
                   <h3>{item.nombre}</h3>
                   <p>{item.desc}</p>
@@ -147,13 +153,58 @@ function App() {
 
         {/* botón de github */}
         <a
-          href="https://github.com/TU_USUARIO_AQUI"
+          href="https://github.com/miguel-montalvo1991"
           target="_blank"
           rel="noreferrer"
         >
           <img src="/img/github.png" width="50" height="50" alt="GitHub" />
         </a>
       </div>
+
+      {/* modal - solo se muestra si hay una imagen guardada en el estado */}
+      {imagenAbierta && (
+        <div
+          onClick={() => setImagenAbierta(null)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0,0,0,0.85)",
+            zIndex: 9999,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={imagenAbierta}
+            alt="Vista ampliada"
+            style={{
+              maxWidth: "90%",
+              maxHeight: "90%",
+              borderRadius: "10px",
+              boxShadow: "0 0 30px rgba(255,255,255,0.3)",
+            }}
+            // esto evita que al hacer click en la imagen se cierre el modal
+            onClick={(e) => e.stopPropagation()}
+          />
+          <span
+            onClick={() => setImagenAbierta(null)}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "30px",
+              color: "white",
+              fontSize: "2rem",
+              cursor: "pointer",
+            }}
+          >
+            &times;
+          </span>
+        </div>
+      )}
     </div>
   );
 }

@@ -46,15 +46,35 @@ body::before {
   font-size: 2.8rem;
   font-weight: 900;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #271adf;
   letter-spacing: 3px;
-  background: linear-gradient(135deg, #d32f2f 0%, #e53935 50%, #c62828 100%);
+  background: linear-gradient(180deg, #f10909, #caa70d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   padding: 20px 30px;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(211, 47, 47, 0.5);
+  box-shadow:0 8px 20px rgba(255, 255, 255, 0.1);
   display: inline-block;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   border: 2px solid rgba(255, 255, 255, 0.2);
+  /* esto es lo nuevo para que resalte */
+    text-shadow: none; /* text-shadow no funciona con text transparente */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    animation: brillar 2s ease-in-out infinite alternate;
+}
+
+@keyframes brillar {
+    from {
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+    to {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+        letter-spacing: 5px;
+    }
+}
+
+.producto img {
+    cursor: pointer;
 }
 
 .container > h2 {
