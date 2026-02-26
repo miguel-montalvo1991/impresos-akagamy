@@ -44,7 +44,7 @@ const productos = {
   ],
   afiches: [
     {
-      img: "afiches.jpg",
+      img: "Afiche.jpg",
       alt: "Afiches gran formato",
       nombre: "Afiches Gran Formato",
       desc: "Máxima visibilidad para tu marca",
